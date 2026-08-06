@@ -43,11 +43,11 @@ export const WalletTray: React.FC<WalletTrayProps> = ({
           <button
             type="button"
             onClick={onResetWallet}
-            className="flex items-center gap-1.5 text-xs md:text-sm text-amber-300 hover:text-white bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/50 px-3 py-2 rounded-xl transition-all shadow-md font-bold"
-            title="補滿錢包金額"
+            className="flex items-center gap-1.5 text-xs md:text-sm text-amber-300 hover:text-white bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/50 px-3.5 py-2 rounded-xl transition-all shadow-md font-black cursor-pointer active:scale-95"
+            title="隨機變換錢包內的硬幣與鈔票數量以提升作答挑戰"
           >
             <RotateCcw className="w-4 h-4" />
-            <span>補滿錢包</span>
+            <span>🔄 更新錢包配置</span>
           </button>
         )}
       </div>
@@ -56,7 +56,7 @@ export const WalletTray: React.FC<WalletTrayProps> = ({
       {scaffoldingLevel === 1 && recommendedType && (
         <div className="bg-amber-400 text-slate-950 border-2 border-amber-200 rounded-2xl p-3 mb-4 flex items-center gap-3 text-sm md:text-base font-black shadow-lg animate-bounce">
           <Sparkles className="w-6 h-6 text-slate-900 shrink-0" />
-          <span>【特教提示】拿 1 個 {recommendedType} 元 {recommendedType === '100' || recommendedType === '500' ? '鈔票' : '硬幣'} 付給店員！</span>
+          <span>【提示】拿 1 個 {recommendedType} 元 {recommendedType === '100' || recommendedType === '500' ? '鈔票' : '硬幣'} 付給店員！</span>
         </div>
       )}
 
