@@ -3,7 +3,6 @@ import { CurrencyType, Product, ScaffoldingLevel, StepRecord } from '../types';
 import { PRODUCTS } from '../data/items';
 import { WalletTray } from './WalletTray';
 import { CashierTray } from './CashierTray';
-import { ClerkDialog } from './ClerkDialog';
 import { PaperMathHelper } from './PaperMathHelper';
 import { ChangeChecker } from './ChangeChecker';
 import { CustomScenarioModal, CustomChallenge } from './CustomScenarioModal';
@@ -286,18 +285,19 @@ export const AdvancedListMode: React.FC<AdvancedListModeProps> = ({
 
       {/* Challenge Task Card */}
       <div className="bg-gradient-to-br from-amber-50 via-orange-50/20 to-amber-100/30 border-3 border-amber-300 rounded-3xl p-5 md:p-6 shadow-xl space-y-5">
-        <div className="bg-white border-3 border-amber-300 rounded-2xl p-4 shadow-md flex items-center justify-between flex-wrap gap-2">
-          <div>
+        {/* Challenge Task Card Header - Enlarged Display */}
+        <div className="bg-white border-4 border-amber-300 rounded-3xl p-5 md:p-6 shadow-md flex items-center justify-between flex-wrap gap-4">
+          <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="bg-amber-400 text-slate-950 font-black text-xs px-2.5 py-0.5 rounded-full">
+              <span className="bg-amber-400 text-slate-950 font-black text-sm px-3 py-1 rounded-full shadow-xs">
                 任務 {activeChallengeIdx + 1}
               </span>
-              <h3 className="font-black text-xl text-amber-950">{challenge.title}</h3>
+              <h3 className="font-black text-2xl md:text-3xl text-amber-950 tracking-tight">{challenge.title}</h3>
             </div>
-            <p className="text-xs md:text-sm text-amber-900 font-black mt-1">{challenge.subtitle}</p>
+            <p className="text-base md:text-lg text-amber-900 font-extrabold">{challenge.subtitle}</p>
           </div>
-          <div className="bg-amber-100 border border-amber-300 px-3 py-1.5 rounded-xl font-black text-xs text-amber-900">
-            預算約: ${challenge.budget} 元
+          <div className="bg-amber-100 border-2 border-amber-300 px-4 py-2 rounded-2xl font-black text-sm md:text-base text-amber-950 shadow-xs">
+            預算約：${challenge.budget} 元
           </div>
         </div>
 
@@ -305,7 +305,7 @@ export const AdvancedListMode: React.FC<AdvancedListModeProps> = ({
           <div className="space-y-6">
             {/* Shopping List Progress */}
             <div className="bg-white border-2 border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-              <h4 className="font-black text-base text-slate-800 flex items-center gap-2">
+              <h4 className="font-black text-base md:text-lg text-slate-800 flex items-center gap-2">
                 <span>📋 購物清單核對 (點擊 +/- 調整數量)：</span>
               </h4>
 
@@ -313,42 +313,42 @@ export const AdvancedListMode: React.FC<AdvancedListModeProps> = ({
                 {targetDetails.map(d => (
                   <div
                     key={d.product.id}
-                    className={`p-4 rounded-2xl border-3 flex items-center justify-between transition-all ${
+                    className={`p-4 md:p-5 rounded-2xl border-3 flex items-center justify-between transition-all ${
                       d.isFulfilled
                         ? 'bg-emerald-50 border-emerald-300 text-emerald-950 shadow-sm'
                         : 'bg-slate-50 border-slate-200 text-slate-800'
                     }`}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 md:gap-4">
                       {d.isFulfilled ? (
-                        <CheckSquare className="w-6 h-6 text-emerald-600 shrink-0" />
+                        <CheckSquare className="w-7 h-7 text-emerald-600 shrink-0" />
                       ) : (
-                        <Square className="w-6 h-6 text-slate-400 shrink-0" />
+                        <Square className="w-7 h-7 text-slate-400 shrink-0" />
                       )}
-                      <span className="text-4xl">{d.product.image}</span>
+                      <span className="text-4xl md:text-5xl">{d.product.image}</span>
                       <div>
-                        <h5 className="font-black text-base md:text-lg">{d.product.name}</h5>
-                        <div className="text-xs md:text-sm font-extrabold text-slate-600">
+                        <h5 className="font-black text-lg md:text-xl text-slate-900">{d.product.name}</h5>
+                        <div className="text-sm md:text-base font-extrabold text-slate-600">
                           單價 ${d.product.price} 元 | 目標需求：{d.targetQuantity} 件
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-2xl border-2 border-slate-300 shadow-xs">
+                    <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-2xl border-2 border-slate-300 shadow-xs">
                       <button
                         type="button"
                         onClick={() => handleAdjustItem(d.product.id, -1)}
-                        className="w-9 h-9 rounded-xl bg-slate-200 font-black text-slate-800 hover:bg-slate-300 active:scale-95 flex items-center justify-center text-base"
+                        className="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 hover:bg-slate-300 active:scale-95 flex items-center justify-center text-lg"
                       >
                         -
                       </button>
-                      <span className="w-8 text-center font-black text-lg md:text-xl text-amber-950">
+                      <span className="w-8 text-center font-black text-xl md:text-2xl text-amber-950">
                         {d.currentQuantity}
                       </span>
                       <button
                         type="button"
                         onClick={() => handleAdjustItem(d.product.id, 1)}
-                        className="w-9 h-9 rounded-xl bg-amber-400 font-black text-slate-950 hover:bg-amber-500 active:scale-95 flex items-center justify-center text-base"
+                        className="w-10 h-10 rounded-xl bg-amber-400 font-black text-slate-950 hover:bg-amber-500 active:scale-95 flex items-center justify-center text-lg"
                       >
                         +
                       </button>
@@ -359,9 +359,9 @@ export const AdvancedListMode: React.FC<AdvancedListModeProps> = ({
 
               {/* Total Price Bar */}
               <div className="mt-4 pt-4 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <div className="bg-amber-100/80 px-4 py-2 rounded-2xl border border-amber-300 w-full sm:w-auto">
-                  <span className="text-xs text-amber-900 font-black block">清單商品總計金額：</span>
-                  <span className="text-3xl font-black text-amber-950">${totalPrice} 元</span>
+                <div className="bg-amber-100/80 px-5 py-3 rounded-2xl border-2 border-amber-300 w-full sm:w-auto">
+                  <span className="text-xs md:text-sm text-amber-900 font-black block">清單商品總計金額：</span>
+                  <span className="text-3xl md:text-4xl font-black text-amber-950">${totalPrice} 元</span>
                 </div>
 
                 <button
@@ -384,17 +384,43 @@ export const AdvancedListMode: React.FC<AdvancedListModeProps> = ({
 
         {/* Stage: Paying or Checking Change */}
         {(stage === 'paying' || stage === 'checking_change') && (
-          <div className="space-y-5">
-            <ClerkDialog
-              clerkText={
-                stage === 'paying'
-                  ? `您好！幫您結帳清單上的商品，總共是 ${totalPrice} 元！`
-                  : `收您 ${totalPaid} 元，找零 ${expectedChange} 元，謝謝您！`
-              }
-              expectedChange={expectedChange}
-              onSelectPhrase={(phrase) => setSelectedPhrase(phrase)}
-              selectedPhrase={selectedPhrase}
-            />
+          <div className="space-y-6">
+            {/* Enlarged Question Summary Banner for List Mode Checkout */}
+            <div className="bg-white border-4 border-amber-400 rounded-3xl p-5 md:p-6 shadow-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+              <div className="flex items-start gap-4 flex-1">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-amber-100 text-amber-900 rounded-2xl flex items-center justify-center text-4xl md:text-5xl shrink-0 border-2 border-amber-300 shadow-md">
+                  📋
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-black text-2xl md:text-3xl lg:text-4xl text-slate-900 tracking-tight">
+                    {challenge.title} • 結帳題目
+                  </h3>
+                  <p className="text-base md:text-lg font-black text-amber-950">
+                    請對照下方總金額，將硬幣與鈔票放上收銀台
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-amber-50 px-5 py-4 rounded-3xl border-2 border-amber-300 flex flex-col sm:flex-row items-center gap-5 w-full lg:w-auto shrink-0 justify-between">
+                <div>
+                  <span className="text-xs md:text-sm font-black text-slate-600 block mb-1">已拿取的清單商品：</span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {targetDetails.map(d => (
+                      <div key={d.product.id} className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-2xl border-2 border-slate-200 text-sm md:text-base font-black shadow-xs">
+                        <span className="text-2xl md:text-3xl">{d.product.image}</span>
+                        <span className="text-slate-900">{d.product.name}</span>
+                        <span className="text-amber-700 font-black">${d.product.price} x {d.currentQuantity}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="text-center sm:text-right border-t sm:border-t-0 sm:border-l-2 border-amber-200 pt-3 sm:pt-0 sm:pl-5 w-full sm:w-auto">
+                  <span className="text-xs md:text-sm font-black text-slate-600 block">清單總金額</span>
+                  <div className="text-3xl md:text-5xl font-black text-amber-600 tracking-tight">${totalPrice} 元</div>
+                </div>
+              </div>
+            </div>
 
             <CashierTray
               paidItems={paidItems}
