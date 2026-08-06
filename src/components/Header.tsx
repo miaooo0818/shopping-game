@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </span>
                 )}
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-300 font-extrabold hidden sm:block">專為自閉症學生設計：大圖卡視覺提示與獨立付錢特訓</p>
+              <p className="text-[11px] sm:text-xs text-slate-300 font-extrabold hidden sm:block">生活購物體驗：大圖卡視覺提示與獨立付錢特訓</p>
             </div>
           </div>
 
