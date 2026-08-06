@@ -26,7 +26,7 @@ export const TeacherReportModal: React.FC<TeacherReportProps> = ({
   const wrongChangeAccuracy = wrongChangeScenarios.length > 0 ? Math.round((correctWrongChangeDetectedCount / wrongChangeScenarios.length) * 100) : 0;
 
   const generateSummaryText = () => {
-    return `【超商購物與找零訓練 - 特教個案個別化學習報告 (IEP)】
+    return `【超商購物與找零訓練 - 學生個別化學習報告 (IEP)】
 日期：${new Date().toLocaleDateString('zh-TW')}
 總訓練關卡次數：${totalMissions} 次
 --------------------------------------------------
@@ -34,10 +34,10 @@ export const TeacherReportModal: React.FC<TeacherReportProps> = ({
 2. 找錯錢辨識與確認率：${wrongChangeAccuracy}% (${correctWrongChangeDetectedCount}/${wrongChangeScenarios.length})
 3. 主動大聲說出「找錯錢了！」成功次數：${saidPhraseCount} 次
 --------------------------------------------------
-專業特教觀察與建議：
-- 個案能順利辨識 NT$1、5、10、50、100 元幣值。
+專業教學觀察與建議：
+- 學生能順利辨識 NT$1、5、10、50、100 元幣值。
 - 對於 100 以內減法找零計算，在紙筆直式減法卡輔助下學習穩定。
-- 在店員找錯錢情境中，個案已能熟練使用固定回應語句：「找錯錢了！」請店員協助處理。
+- 在店員找錯錢情境中，學生已能熟練使用固定回應語句：「找錯錢了！」請店員協助處理。
 `;
   };
 
@@ -59,11 +59,11 @@ export const TeacherReportModal: React.FC<TeacherReportProps> = ({
           <div className="flex items-center gap-2">
             <span className="p-2 bg-amber-100 text-amber-800 rounded-xl font-bold">📊</span>
             <h2 className="font-black text-xl md:text-2xl text-slate-900">
-              特教模擬購物與找零訓練 - 個案學習歷程報告
+              模擬購物與找零訓練 - 學生學習歷程報告
             </h2>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            專為特教老師、心理師及家長提供之評估數據與 IEP 個別化教育計畫紀錄
+            專為教師與家長提供之評估數據與 IEP 個別化教育計畫紀錄
           </p>
         </div>
 
@@ -139,17 +139,17 @@ export const TeacherReportModal: React.FC<TeacherReportProps> = ({
       <div className="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-5 mb-6 border border-slate-700">
         <h3 className="font-extrabold text-base text-amber-300 mb-2 flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-amber-400" />
-          <span>IEP 特教教學觀察與個案實施指引</span>
+          <span>IEP 教學觀察與實施指引</span>
         </h3>
         <div className="text-xs md:text-sm text-slate-300 space-y-2 leading-relaxed">
           <p>
-            📌 <strong>金錢概念現況：</strong> 個案已能正確拿取 NT$1、5、10、50、100 元幣值。
+            📌 <strong>金錢概念現況：</strong> 學生已能正確拿取 NT$1、5、10、50、100 元幣值。
           </p>
           <p>
             📌 <strong>找零計算輔助：</strong> 建議保留「直式減法紙筆輔助卡」進行 100 以內減法練習（如蘋果牛奶 35 元，拿 50 元付錢，直式減法得找零 15 元）。
           </p>
           <p>
-            📌 <strong>社交情境應對：</strong> 個案無須強求理解「少找」或「多找」複雜數學概念，重點在於檢驗金額與直式輔助卡不符時，能<b>直覺化大聲說出「找錯錢了！」</b>，將複雜情境簡化為店員標準協助流程。
+            📌 <strong>社交情境應對：</strong> 學生無須強求理解「少找」或「多找」複雜數學概念，重點在於檢驗金額與直式輔助卡不符時，能<b>直覺化大聲說出「找錯錢了！」</b>，將複雜情境簡化為店員標準協助流程。
           </p>
         </div>
       </div>
