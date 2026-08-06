@@ -195,16 +195,9 @@ export const MissionMode: React.FC<MissionModeProps> = ({
               {mission.icon}
             </div>
             <div className="space-y-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className="font-black text-2xl md:text-3xl lg:text-4xl text-slate-900 tracking-tight">
-                  {mission.title}
-                </h3>
-                {mission.isWrongChangeScenario && (
-                  <span className="bg-red-500 text-white text-xs md:text-sm font-black px-2.5 py-1 rounded-lg animate-pulse shadow-sm">
-                    ⚠️ 找錯錢應對特訓
-                  </span>
-                )}
-              </div>
+              <h3 className="font-black text-2xl md:text-3xl lg:text-4xl text-slate-900 tracking-tight">
+                {mission.title}
+              </h3>
               <p className="text-base md:text-lg font-black text-amber-950">{mission.subtitle}</p>
               <p className="text-sm md:text-base font-extrabold text-slate-600">{mission.description}</p>
             </div>
