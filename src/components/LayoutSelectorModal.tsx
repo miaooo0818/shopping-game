@@ -97,7 +97,7 @@ export const LayoutSelectorModal: React.FC<LayoutSelectorModalProps> = ({
             請選擇您要使用的【遊戲版面】與【平板設定】
           </h2>
           <p className="text-xs md:text-sm text-slate-300">
-            針對自閉症學童視覺需求，可在此隨時切換訓練版面與大圖卡顯示模式
+            針對大字與簡潔視覺需求，可在此隨時切換遊戲版面與大圖卡顯示模式
           </p>
         </div>
 
@@ -153,7 +153,7 @@ export const LayoutSelectorModal: React.FC<LayoutSelectorModalProps> = ({
             <Volume2 className="w-5 h-5 text-teal-400" />
             <div>
               <span className="font-extrabold text-base text-teal-200 block">語音朗讀速度：</span>
-              <span className="text-xs text-slate-400">適中的語音速度有助於自閉症學童理解指令</span>
+              <span className="text-xs text-slate-400">適中的語音速度有助於清晰聆聽指令</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
