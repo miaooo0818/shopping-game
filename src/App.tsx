@@ -133,7 +133,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="font-bold text-slate-700">超商購物大冒險</span>
-            <span>- 自閉症兒童模擬購物與找零訓練系統</span>
+            <span>- 兒童生活模擬購物與找零練習系統</span>
           </div>
           <div className="flex items-center gap-3">
             <button
