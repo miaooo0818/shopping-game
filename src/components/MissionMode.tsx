@@ -5,7 +5,6 @@ import { PRODUCTS } from '../data/items';
 import { getRecommendedPayment, generateVariedWalletForPrice } from '../data/currency';
 import { WalletTray } from './WalletTray';
 import { CashierTray } from './CashierTray';
-import { ClerkDialog } from './ClerkDialog';
 import { PaperMathHelper } from './PaperMathHelper';
 import { ChangeChecker } from './ChangeChecker';
 import { speakText } from '../utils/speech';
@@ -189,64 +188,48 @@ export const MissionMode: React.FC<MissionModeProps> = ({
 
       {/* Active Mission Workspace */}
       <div className="bg-gradient-to-br from-slate-50 to-amber-50/30 border-2 border-emerald-200 rounded-3xl p-5 md:p-6 shadow-xl space-y-6">
-        {/* Mission Info Banner */}
-        <div className="bg-white border-2 border-emerald-300 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-start gap-3">
-            <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center text-3xl shrink-0 border border-emerald-300 shadow-xs">
+        {/* Mission Info Banner - Enlarged Display for High Readability */}
+        <div className="bg-white border-4 border-emerald-400 rounded-3xl p-5 md:p-6 shadow-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div className="flex items-start gap-4 flex-1">
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center text-4xl md:text-5xl shrink-0 border-2 border-emerald-300 shadow-md">
               {mission.icon}
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-black text-lg text-slate-900">{mission.title}</h3>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="font-black text-2xl md:text-3xl lg:text-4xl text-slate-900 tracking-tight">
+                  {mission.title}
+                </h3>
                 {mission.isWrongChangeScenario && (
-                  <span className="bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-md animate-pulse">
+                  <span className="bg-red-500 text-white text-xs md:text-sm font-black px-2.5 py-1 rounded-lg animate-pulse shadow-sm">
                     ⚠️ 找錯錢應對特訓
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-600 font-bold mt-0.5">{mission.subtitle}</p>
-              <p className="text-xs text-slate-500 mt-1">{mission.description}</p>
+              <p className="text-base md:text-lg font-black text-amber-950">{mission.subtitle}</p>
+              <p className="text-sm md:text-base font-extrabold text-slate-600">{mission.description}</p>
             </div>
           </div>
 
-          <div className="bg-emerald-50 px-4 py-3 rounded-2xl border border-emerald-200 flex items-center gap-4 shrink-0">
+          <div className="bg-emerald-50 px-5 py-4 rounded-3xl border-2 border-emerald-300 flex flex-col sm:flex-row items-center gap-5 w-full lg:w-auto shrink-0 justify-between">
             <div>
-              <span className="text-xs text-slate-500 font-bold block">目標購買商品：</span>
-              <div className="flex items-center gap-2 mt-1">
+              <span className="text-xs md:text-sm font-black text-slate-600 block mb-1">購買目標商品：</span>
+              <div className="flex flex-wrap items-center gap-2">
                 {targetProducts.map(tp => (
-                  <div key={tp.product.id} className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-xl border border-slate-200 text-xs font-bold">
-                    <span>{tp.product.image}</span>
-                    <span>{tp.product.name}</span>
+                  <div key={tp.product.id} className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-2xl border-2 border-slate-200 text-sm md:text-base font-black shadow-xs">
+                    <span className="text-2xl md:text-3xl">{tp.product.image}</span>
+                    <span className="text-slate-900">{tp.product.name}</span>
                     <span className="text-emerald-700 font-black">${tp.product.price}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="text-right border-l border-emerald-200 pl-4">
-              <span className="text-xs text-slate-500 font-bold">應付總額</span>
-              <div className="text-2xl font-black text-amber-600">${totalPrice} 元</div>
+            <div className="text-center sm:text-right border-t sm:border-t-0 sm:border-l-2 border-emerald-200 pt-3 sm:pt-0 sm:pl-5 w-full sm:w-auto">
+              <span className="text-xs md:text-sm font-black text-slate-600 block">商品應付總額</span>
+              <div className="text-3xl md:text-5xl font-black text-amber-600 tracking-tight">${totalPrice} 元</div>
             </div>
           </div>
         </div>
-
-        {/* Clerk Interactive Dialogue */}
-        <ClerkDialog
-          clerkText={
-            step === 'intro'
-              ? `歡迎光臨！請幫我拿金額放上收銀台，總共是 ${totalPrice} 元！`
-              : step === 'paying'
-              ? `好的！收到您的錢囉，請確認金額是否足夠。`
-              : step === 'checking_change'
-              ? `收您 ${totalPaid} 元，遞給您找零 ${actualGivenChange} 元，謝謝您！`
-              : `謝謝光臨，歡迎下次再來！`
-          }
-          isWrongChangeScenario={mission.isWrongChangeScenario && step === 'checking_change'}
-          actualGivenChange={actualGivenChange}
-          expectedChange={expectedChange}
-          onSelectPhrase={(phrase) => setSelectedPhrase(phrase)}
-          selectedPhrase={selectedPhrase}
-        />
 
         {/* STEP 1: INTRO -> Start Paying */}
         {step === 'intro' && (
