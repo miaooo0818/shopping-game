@@ -3,7 +3,6 @@ import { CartItem, CurrencyType, Product, ScaffoldingLevel, StepRecord } from '.
 import { ProductList } from './ProductList';
 import { WalletTray } from './WalletTray';
 import { CashierTray } from './CashierTray';
-import { ClerkDialog } from './ClerkDialog';
 import { PaperMathHelper } from './PaperMathHelper';
 import { ChangeChecker } from './ChangeChecker';
 import { getRecommendedPayment, generateVariedWalletForPrice } from '../data/currency';
@@ -253,20 +252,43 @@ export const FreeShopMode: React.FC<FreeShopModeProps> = ({
 
       {/* Stage: Paying or Checking Change */}
       {(stage === 'paying' || stage === 'checking_change') && (
-        <div className="bg-gradient-to-br from-slate-50 to-emerald-50/30 border-2 border-emerald-200 rounded-3xl p-5 md:p-6 shadow-xl space-y-5">
-          {/* Clerk Dialogue */}
-          <ClerkDialog
-            clerkText={
-              stage === 'paying'
-                ? `您好！包含此 ${cart.length} 件商品，總共是 ${totalPrice} 元。`
-                : `收您 ${totalPaid} 元，找您 ${actualGivenChange} 元！`
-            }
-            isWrongChangeScenario={simulateWrongChange && stage === 'checking_change'}
-            actualGivenChange={actualGivenChange}
-            expectedChange={expectedChange}
-            onSelectPhrase={(phrase) => setSelectedPhrase(phrase)}
-            selectedPhrase={selectedPhrase}
-          />
+        <div className="bg-gradient-to-br from-slate-50 to-emerald-50/30 border-2 border-emerald-200 rounded-3xl p-5 md:p-6 shadow-xl space-y-6">
+          {/* Question / Cart Summary Header - Enlarged Display for High Readability */}
+          <div className="bg-white border-4 border-emerald-400 rounded-3xl p-5 md:p-6 shadow-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="flex items-start gap-4 flex-1">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-amber-100 text-amber-800 rounded-2xl flex items-center justify-center text-4xl md:text-5xl shrink-0 border-2 border-amber-300 shadow-md">
+                🛒
+              </div>
+              <div className="space-y-1">
+                <h3 className="font-black text-2xl md:text-3xl lg:text-4xl text-slate-900 tracking-tight">
+                  自由超市結帳題目
+                </h3>
+                <p className="text-base md:text-lg font-black text-amber-950">
+                  請將右側對應總金額的硬幣與鈔票放上收銀台托盤
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-emerald-50 px-5 py-4 rounded-3xl border-2 border-emerald-300 flex flex-col sm:flex-row items-center gap-5 w-full lg:w-auto shrink-0 justify-between">
+              <div>
+                <span className="text-xs md:text-sm font-black text-slate-600 block mb-1">購物籃內商品 ({cart.length} 件)：</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  {cart.map(item => (
+                    <div key={item.product.id} className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-2xl border-2 border-slate-200 text-sm md:text-base font-black shadow-xs">
+                      <span className="text-2xl md:text-3xl">{item.product.image}</span>
+                      <span className="text-slate-900">{item.product.name}</span>
+                      <span className="text-amber-700 font-black">${item.product.price} x {item.quantity}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="text-center sm:text-right border-t sm:border-t-0 sm:border-l-2 border-emerald-200 pt-3 sm:pt-0 sm:pl-5 w-full sm:w-auto">
+                <span className="text-xs md:text-sm font-black text-slate-600 block">結帳應付總額</span>
+                <div className="text-3xl md:text-5xl font-black text-amber-600 tracking-tight">${totalPrice} 元</div>
+              </div>
+            </div>
+          </div>
 
           <CashierTray
             paidItems={paidItems}
