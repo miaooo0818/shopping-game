@@ -3,7 +3,6 @@ import { CurrencyType } from '../types';
 import { CurrencyIcon } from './CurrencyIcon';
 import { CreditCard, ArrowRight, Trash2, CheckCircle, AlertCircle } from 'lucide-react';
 import { speakText, playTone } from '../utils/speech';
-import { FloatingClerkAvatar } from './FloatingClerkAvatar';
 
 interface CashierTrayProps {
   paidItems: { type: CurrencyType; id: string }[];
@@ -149,9 +148,6 @@ export const CashierTray: React.FC<CashierTrayProps> = ({
           </button>
         </div>
       </div>
-
-      {/* Floating Supermarket Clerk Avatar Assistant */}
-      <FloatingClerkAvatar totalPaid={totalPaid} requiredPrice={requiredPrice} />
     </div>
   );
 };
